@@ -1,0 +1,4 @@
+-debug
+-cp src
+-js out/markupcontexttest.js
+-main test.appmarkup.MarkupContextTest

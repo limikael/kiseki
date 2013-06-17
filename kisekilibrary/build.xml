@@ -1,0 +1,94 @@
+<project name="kisekitest">
+        <target name="tokenizertest">
+                <exec executable="haxe" failonerror="true">
+                        <arg value="-debug"/>
+                        <arg value="-cp"/>
+                        <arg value="src"/>
+                        <arg value="-js"/>
+                        <arg value="out/tokenizertest.js"/>
+                        <arg value="-main"/>
+                        <arg value="test.evaluator.TokenizerTest"/>
+                </exec>
+        </target>
+
+        <target name="globtest">
+                <exec executable="haxe" failonerror="true">
+                        <arg value="-debug"/>
+                        <arg value="-cp"/>
+                        <arg value="src"/>
+                        <arg value="-js"/>
+                        <arg value="out/globtest.js"/>
+                        <arg value="-main"/>
+                        <arg value="test.utils.GlobTest"/>
+                </exec>
+        </target>
+
+        <target name="expressiontest">
+                <exec executable="haxe" failonerror="true">
+                        <arg value="-debug"/>
+                        <arg value="-cp"/>
+                        <arg value="src"/>
+                        <arg value="-js"/>
+                        <arg value="out/expressiontest.js"/>
+                        <arg value="-main"/>
+                        <arg value="test.evaluator.ExpressionTest"/>
+                </exec>
+        </target>
+
+        <target name="signaltest">
+                <exec executable="haxe" failonerror="true">
+                        <arg value="-debug"/>
+                        <arg value="-cp"/>
+                        <arg value="src"/>
+                        <arg value="-js"/>
+                        <arg value="out/signaltest.js"/>
+                        <arg value="-main"/>
+                        <arg value="test.signals.SignalTest"/>
+                </exec>
+        </target>
+
+        <target name="markupcontexttest">
+                <exec executable="haxe" failonerror="true">
+                        <arg value="-debug"/>
+                        <arg value="-cp"/>
+                        <arg value="src"/>
+                        <arg value="-js"/>
+                        <arg value="out/markupcontexttest.js"/>
+                        <arg value="-main"/>
+                        <arg value="test.appmarkup.MarkupContextTest"/>
+                </exec>
+        </target>
+
+        <target name="coursetest">
+                <exec executable="haxelib" failonerror="true">
+                        <arg value="run"/>
+                        <arg value="nme"/>
+                        <arg value="build"/>
+                        <arg value="src/test/course/CourseTest.nmml"/>
+                        <arg value="flash"/>
+                </exec>
+                <copy file="src/test/course/res/buildicon.png" todir="out/flash/bin" />
+        </target>
+
+        <target name="resourcestest">
+                <exec executable="haxelib" failonerror="true">
+                        <arg value="run"/>
+                        <arg value="nme"/>
+                        <arg value="build"/>
+                        <arg value="src/test/resources/ResourcesTest.nmml"/>
+                        <arg value="flash"/>
+                </exec>
+                <copy file="src/test/resources/buildicon.png" todir="out/flash/bin" />
+         </target>
+
+        <target name="uitest">
+                <exec executable="haxelib" failonerror="true">
+                        <arg value="run"/>
+                        <arg value="nme"/>
+                        <arg value="build"/>
+                        <arg value="src/test/ui/UiTest.nmml"/>
+                        <arg value="flash"/>
+                </exec>
+<!--                <copy file="src/test/resources/buildicon.png" todir="out/flash/bin" />-->
+         </target>
+</project>

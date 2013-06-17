@@ -1,0 +1,11 @@
+<project name="kisekitest" default="testcourse">
+        <target name="testcourse">
+                <exec executable="haxelib" failonerror="true">
+                        <arg value="run"/>
+                        <arg value="nme"/>
+                        <arg value="build"/>
+                        <arg value="Testcourse.nmml"/>
+                        <arg value="flash"/>
+                </exec>
+        </target>
+</project>

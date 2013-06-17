@@ -1,0 +1,152 @@
+
+<course>
+	<Intro>
+				<header>Be Deric Lipski</header>
+		<body>In this game, you are Deric Lipski, a real estate broker in Easton, Massachusetts.
+
+You have found a listing for a property that came off the market without selling.
+
+Let’s see if you can convince the owner of the property that you can do a better job of selling his property than the previous broker.
+
+Go get them tiger!</body>
+					<img src="image1.jpeg"/>
+			</Intro>
+
+			<Decision id="decision_0">
+			<transcript>Client: Hello?</transcript>
+			<question>What do you say when the potential client picks up the phone?</question>
+			<audiostart>46.937</audiostart>
+			<audioend>53.826</audioend>
+			<audio src="prospectingcall.mp3"/>
+			<alternatives>
+									<DecisionAlternative>
+						<buttontext>Ask to speak to the property owner.</buttontext>
+						<feedback>Yes that’s a good choice, always make sure you are talking to the right person.</feedback>
+						<score>10</score>
+													<correct>true</correct>
+											</DecisionAlternative>
+									<DecisionAlternative>
+						<buttontext>It must be the property owner on the other end of the line, why else would he pick up the phone?</buttontext>
+						<feedback>It is actually a good idea to make sure you are talking to the right person. Otherwise this might be asked as an excuse to finish the call.</feedback>
+						<score>0</score>
+											</DecisionAlternative>
+							</alternatives>
+		</Decision>
+			<Decision id="decision_1">
+			<transcript>You: Hello. Good morning. I’m looking for Patrik.
+
+Client: Oh yes. Sorry who is this?</transcript>
+			<question>How do you proceed?</question>
+			<audiostart>53.656</audiostart>
+			<audioend>58.219</audioend>
+			<audio src="prospectingcall.mp3"/>
+			<alternatives>
+									<DecisionAlternative>
+						<buttontext>Introduce yourself and ask if the owner needs a new broker to sell his property.</buttontext>
+						<feedback>It might be a bit too early to ask that question already.</feedback>
+						<score>0</score>
+											</DecisionAlternative>
+									<DecisionAlternative>
+						<buttontext>Introduce yourself and ask if the property has been sold.</buttontext>
+						<feedback>Yes that’s good...</feedback>
+						<score>10</score>
+													<correct>true</correct>
+											</DecisionAlternative>
+							</alternatives>
+		</Decision>
+			<Decision id="decision_2">
+			<transcript>You: Patrik, this is Deric Lipski with Calawaynes Real Estate, I was just giving you a call this morning, I noticed that your home has popped off the market as an expired listing last night and I was calling to see if you got sold the home or is it still for sale?
+
+Client: No, no. Did my number come up on a list or something?</transcript>
+			<question>How do you proceed?</question>
+			<audiostart>58.219</audiostart>
+			<audioend>1:17.958</audioend>
+			<audio src="prospectingcall.mp3"/>
+			<alternatives>
+									<DecisionAlternative>
+						<buttontext>Thank for the call and hang up, this client is clearly not interested.</buttontext>
+						<feedback>Don’t let him off the hook just yet!</feedback>
+						<score>0</score>
+											</DecisionAlternative>
+									<DecisionAlternative>
+						<buttontext>Explain that you are interested to know if the property is still for sale or if it has been sold already.</buttontext>
+						<feedback>Yes that’s good, no reason to let this client off the hook just yet!</feedback>
+						<score>10</score>
+													<correct>true</correct>
+											</DecisionAlternative>
+							</alternatives>
+		</Decision>
+			<Decision id="decision_3">
+			<transcript>You: Actually I’m not allowed to call you before your home comes off the market so I wanted to ask if you sold the home or if it’s something that’s still up for sale or what was going on with it.
+
+Client: No, you know... I don’t know... Can you call me back a bit later this afternoon?</transcript>
+			<question>How do you proceed?</question>
+			<audiostart>1:17.958</audiostart>
+			<audioend>1:35.839</audioend>
+			<audio src="prospectingcall.mp3"/>
+			<alternatives>
+									<DecisionAlternative>
+						<buttontext>Ask what time the client would want you to call back.</buttontext>
+						<feedback>No not yet..</feedback>
+						<score>0</score>
+											</DecisionAlternative>
+									<DecisionAlternative>
+						<buttontext>Say that you are willing to call back at a later time, but also ask a followup question in order to not end the conversation already.</buttontext>
+						<feedback>Yes that’s good, no reason to let this client off the hook just yet!</feedback>
+						<score>10</score>
+													<correct>true</correct>
+											</DecisionAlternative>
+									<DecisionAlternative>
+						<buttontext>Ignore the clients request, and ask if the client wants you to sell his home.</buttontext>
+						<feedback>This might come across as a bit rude.</feedback>
+						<score>0</score>
+											</DecisionAlternative>
+							</alternatives>
+		</Decision>
+			<Decision id="decision_4">
+			<transcript>You: Yes certainly, I can give you a call back. Did you still want to sell the home Patrick?
+
+Client: I don’t know... We have been on the market for quite some time and I don’t know what we’re going to do now...</transcript>
+			<question>How do you proceed?</question>
+			<audiostart>1:35.839</audiostart>
+			<audioend>1:47.749</audioend>
+			<audio src="prospectingcall.mp3"/>
+			<alternatives>
+									<DecisionAlternative>
+						<buttontext>Ask if the client have received any offers so far.</buttontext>
+						<feedback>Good...</feedback>
+						<score>10</score>
+													<correct>true</correct>
+											</DecisionAlternative>
+									<DecisionAlternative>
+						<buttontext>Ask if the client wishes to sell.</buttontext>
+						<feedback>Bad...</feedback>
+						<score>0</score>
+											</DecisionAlternative>
+							</alternatives>
+		</Decision>
+			<Decision id="decision_5">
+			<transcript>You: Well you know, let me ask you this because I know the neighbourhood you are in, I saw the property was on for 6 months. I understand why you are thinking about taking a break, that makes sense to me. In the time you were on the market, have you received any offers?
+
+Client: No.
+
+You: Ouch. Ok.</transcript>
+			<question>How do you proceed?</question>
+			<audiostart>1:47.749</audiostart>
+			<audioend>2:04.242</audioend>
+			<audio src="prospectingcall.mp3"/>
+			<alternatives>
+									<DecisionAlternative>
+						<buttontext>Establish trust with the client by asking where he is planning to move if the house got sold.</buttontext>
+						<feedback>Good...</feedback>
+						<score>10</score>
+													<correct>true</correct>
+											</DecisionAlternative>
+									<DecisionAlternative>
+						<buttontext>Explain that you have a better track record than any other broker in the area.</buttontext>
+						<feedback>No, trust is important...</feedback>
+						<score>0</score>
+											</DecisionAlternative>
+							</alternatives>
+		</Decision>
+	</course>

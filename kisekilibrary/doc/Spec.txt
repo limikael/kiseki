@@ -1,0 +1,47 @@
+TODO:
+
+* use images
+* don't save several times
+* loader
+* PersistenceState class
+* persistence selection by parameter
+
+
+<Course>
+	<content>
+		<Background/>
+		<Navigation/>
+
+		<Pager id="pager">
+		</Pager>
+	</content>
+
+	<triggers>
+		<Trigger from="" event="" criteria="{pager.current>0}">
+			<action>
+				<Prev ref="pager"/>
+			</action>
+		</Trigger>
+
+		<Trigger from="" event="" criteria="{pager.current<pager.numpages-1}">
+			<action>
+				<Next ref="pager"/>
+			</action>
+		</Trigger>
+	</triggers>
+
+	<init>
+		<Hide ref="*"/>
+		<Show ref="background"/>
+		<Show ref=""/>
+	</init>
+
+	<declarations>
+		<Var id=""></Var>
+		<Var id=""></Var>
+	</declarations>
+
+<!--	<persistance>
+		<ScormPersistance />
+	</persistance> -->
+</Course>

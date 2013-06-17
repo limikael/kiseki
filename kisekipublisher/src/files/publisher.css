@@ -1,0 +1,122 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	background: #4dacda;
+	width: 100%;
+	height: 100%;
+
+	font-family: verdana, arial, sans-serif;
+	font-size: 12px;
+}
+
+h1 {
+	color: #000000;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 5px;
+	padding-top: 0px;
+	border: 0;
+	font-size: 30px;
+}
+
+h2 {
+	color: #000000;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 5px;
+	padding-top: 15px;
+	margin: 0;
+	border: 0;
+	font-size: 20px;
+}
+
+.description {
+	color: #808080;
+
+}
+
+hr {
+	height: 1px;
+	color: #808080;
+	border: none;
+	border-top: 1px solid #808080;
+	margin: none
+}
+
+#canvas {
+	background: #ffffff;
+	width: 800px;
+	border: 1px solid #000000;
+	padding: 20px;
+	margin: auto;
+}
+
+#canvas-wrapper {
+	margin: auto;
+	width: 100%;
+	padding: 50px 0;
+}
+
+.leftpane {
+	width: 300px;
+	float: left;
+	border-right: 1px solid #808080; 
+	padding-right: 80px;
+	margin-right: 20px;
+	min-height: 200px;
+}
+
+.rightpane {
+	width: 300px;
+	margin-left: 0px;
+	padding-left: 0px;
+	float: left;
+}
+
+#download-holder {
+	width: 780px; 
+	height: 50px;
+	border: 1px dashed #000000; 
+	margin-top: 35px; 
+	background: #f0f0f0;
+	padding: 10px;
+}
+
+.gray {
+	color: #808080;
+}
+
+.small {
+	font-size: 10pt;
+}
+
+a {
+	text-decoration: none;
+	color: #0000ff;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#log-header {
+	margin-top: 30px;
+	margin-bottom: 5px;
+}
+
+#log {
+	border: 1px solid #000000;
+	background: #404040;
+	width: 780px;
+	height: 250px;
+	padding: 10px;
+	font-family: courier;
+	color: #00ff00;
+	overflow-y: scroll;
+}
+
+.documenticon {
+	vertical-align: middle;
+	padding-left: 20px;
+	padding-right: 5px;
+}

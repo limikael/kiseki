@@ -1,0 +1,36 @@
+<Course width="960" height="720">
+	<content>
+		<Background>
+			<title>Testing...</title>
+		</Background>
+		<Pager id="pager">
+			<pages>
+				<Intro>
+					<header>Start</header>
+					<content>Hello World!</content>
+				</Intro>
+				<Intro>
+					<header>Page 2</header>
+					<content>This is the second page, lets get on with it...</content>
+				</Intro>
+			</pages>
+		</Pager>
+	</content>
+
+	<init>
+		<First ref="pager"/>
+	</init>
+
+	<triggers>
+		<Trigger event="right">
+			<action>
+				<Next ref="pager"/>
+			</action>
+		</Trigger>
+		<Trigger event="left">
+			<action>
+				<Prev ref="pager"/>
+			</action>
+		</Trigger>
+	</triggers>
+</Course>
