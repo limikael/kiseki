@@ -9,4 +9,6 @@ interface IPersister {
 
 	function save(state:PersistenceState):Void;
 
+	function quit():Void;
+
 }

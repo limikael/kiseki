@@ -25,6 +25,7 @@ import org.kisekiproject.actions.Hide;
 import org.kisekiproject.actions.Show;
 import org.kisekiproject.actions.Goto;
 import org.kisekiproject.actions.Save;
+import org.kisekiproject.actions.Exit;
 
 import org.kisekiproject.pages.Pager;
 
@@ -114,7 +115,7 @@ class CourseRunner extends Sprite {
 				c=Type.resolveClass("org.kisekiproject.course."+className);
 				return Type.createInstance(c,[]);
 
-			case "Next", "Prev", "Show", "Hide", "First", "Last", "Goto", "Save":
+			case "Next", "Prev", "Show", "Hide", "First", "Last", "Goto", "Save", "Exit":
 				//trace("creating: "+className);
 				c=Type.resolveClass("org.kisekiproject.actions."+className);
 				return Type.createInstance(c,[]);

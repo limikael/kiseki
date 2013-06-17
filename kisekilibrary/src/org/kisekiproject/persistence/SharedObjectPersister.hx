@@ -38,4 +38,10 @@ class SharedObjectPersister implements IPersister {
 		_so.data.score=persistenceState.score;
 		_so.flush();
 	}
+
+	/**
+	 * Quit.
+	 */
+	public function quit():Void {
+	}
 }

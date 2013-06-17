@@ -69,4 +69,14 @@ class ScormPersister implements IPersister {
 		if (!connectResult)
 			throw "Unable to connect to scorm";
 	}
+
+	/**
+	 * Quit.
+	 */
+	public function quit():Void {
+		if (_scorm==null)
+			connect();
+
+		_scorm.disconnect();
+	}
 }

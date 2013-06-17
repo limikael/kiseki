@@ -212,4 +212,15 @@ class Course implements haxe.rtti.Infos {
 			}
 		}
 	}
+
+	/**
+	 * Exit.
+	 */
+	public function exit():Void {
+		trace("**** exit ****");
+		doSave();
+
+		if (_persister!=null)
+			_persister.quit();
+	}
 }
