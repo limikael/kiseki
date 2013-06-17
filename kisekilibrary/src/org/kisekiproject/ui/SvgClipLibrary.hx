@@ -35,6 +35,11 @@ class SvgClipLibrary {
 	 * Parse asset.
 	 */
 	public static function parseAsset(assetName:String):SvgClipLibrary {
-		return parse(Assets.getText(assetName));
+		var s:String=Assets.getText(assetName);
+
+		if (s==null)
+			throw "Unable to get asset";
+
+		return parse(s);
 	}
 }
