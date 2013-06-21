@@ -13,14 +13,8 @@
 		/**
 		 * Constructor.
 		 */
-		public function OdtImageNode() {
-		}
-
-		/**
-		 * Set reference to odt.
-		 */
-		public function setOdt($value) {
-			$this->odt=$value;
+		public function OdtImageNode($odt) {
+			$this->odt=$odt;
 		}
 
 		/**

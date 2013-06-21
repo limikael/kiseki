@@ -15,7 +15,8 @@
 		/**
 		 * Constructor.
 		 */
-		public function OdtStyle() {
+		public function OdtStyle($odt) {
+			$this->odt=$odt;
 		}
 
 		/**
@@ -23,13 +24,6 @@
 		 */
 		public function setIsDefined($value) {
 			$this->isDefined=$value;
-		}
-
-		/**
-		 * Set reference to document.
-		 */
-		public function setOdtFile($value) {
-			$this->odt=$value;
 		}
 
 		/**

@@ -2,8 +2,9 @@
 
 	require_once "odt/OdtStyle.php";
 	require_once "odt/OdtNode.php";
-	require_once "odt/OdtTextNode.php";
-	require_once "odt/OdtImageNode.php";
+/*	require_once "odt/OdtTextNode.php";
+	require_once "odt/OdtImageNode.php";*/
+	require_once "odt/OdtNodeProcessor.php";
 
 	/**
 	 * ODT file parser.
@@ -15,7 +16,6 @@
 		private $stylesDom;
 		private $stylesByName;
 		private $nodes;
-		private $currentNode;
 
 		/**
 		 * Constructor.
@@ -85,9 +85,8 @@
 			foreach ($parent->childNodes as $node) {
 				if ($node->nodeName!="style:default-style" &&
 						$node->nodeName!="text:notes-configuration") {
-					$style=new OdtStyle();
+					$style=new OdtStyle($this);
 					$style->setIsDefined($isDefined);
-					$style->setOdtFile($this);
 					$style->parse($node);
 
 					$this->stylesByName[$style->getName()]=$style;
@@ -113,24 +112,28 @@
 			$contentNode=$this->getChildElement($this->contentDom,"office:document-content");
 			$bodyNode=$this->getChildElement($contentNode,"office:body");
 			$textNode=$this->getChildElement($bodyNode,"office:text");
-			$this->processTextNode($textNode,array());
+
+			$processor=new OdtNodeProcessor($this);
+			$this->nodes=$processor->processNode($textNode);
+
+/*			$this->processTextNode($textNode,array());
 
 			if ($this->currentNode && $this->currentNode->getText())
-				$this->nodes[]=$this->currentNode;
+				$this->nodes[]=$this->currentNode;*/
 		}
 
 		/**
 		 * Process text nodes.
 		 */
-		private function processTextNodes($nodes, $styleChain) {
+/*		private function processTextNodes($nodes, $styleChain) {
 			foreach ($nodes as $node)
 				$this->processTextNode($node,$styleChain);
-		}
+		}*/
 
 		/**
 		 * Precessing text node.
 		 */
-		private function processTextNode($node, $styleChain) {
+/*		private function processTextNode($node, $styleChain) {
 			if ($node->nodeName=="office:annotation")
 				return;
 
@@ -155,18 +158,24 @@
 				$this->nodes[]=$imageNode;
 			}
 
+			if ($node->nodeName=="table:table") {
+				if ($this->currentNode && $this->currentNode->getText()) {
+					$this->nodes[]=$this->currentNode;
+					$this->currentNode=null;
+				}
+			}
 
 			if ($node->hasChildNodes())
 				$this->processTextNodes($node->childNodes,$styleChain);
 
 			if ($node->nodeName=="text:p" || $node->nodeName=="text:h")
 				$this->appendText("\n",$styleChain);
-		}
+		}*/
 
 		/**
 		 * Get style name from chain.
 		 */
-		private function getStyleNameFromChain($styleChain) {
+/*		private function getStyleNameFromChain($styleChain) {
 			$styleName=null;
 
 			foreach ($styleChain as $style)
@@ -174,12 +183,12 @@
 					$styleName=$style->getDisplayName();
 
 			return $styleName;
-		}
+		}*/
 
 		/**
 		 * Get color from chain.
 		 */
-		private function getColorFromChain($styleChain) {
+/*		private function getColorFromChain($styleChain) {
 			$color=null;
 
 			foreach ($styleChain as $style)
@@ -187,12 +196,12 @@
 					$color=$style->getColor();
 
 			return $color;
-		}
+		}*/
 
 		/**
 		 * Append text to the current node.
 		 */
-		private function appendText($s, $styleChain) {
+/*		private function appendText($s, $styleChain) {
 			$styleName=$this->getStyleNameFromChain($styleChain);
 			$color=$this->getColorFromChain($styleChain);
 
@@ -211,7 +220,7 @@
 			//echo "style: $styleName text: $s\n";
 
 			$this->currentNode->appendText($s);
-		}
+		}*/
 
 		/**
 		 * Get nodes.

@@ -1,6 +1,7 @@
 <?php
 
 	require_once "documentnode/DocumentNode.php";
+	require_once "documentnode/DocumentTable.php";
 
 	/**
 	 * Parses an odt into a document node hierarchy.
@@ -36,6 +37,9 @@
 			if ($odtNode->getType()==OdtNode::IMAGE)
 				return true;
 
+			if ($odtNode->getType()==OdtNode::TABLE)
+				return true;
+
 			if ($this->getLevelByStyleName($odtNode->getStyle())==sizeof($this->styleHierarchy)-1)
 				return true;
 
@@ -53,7 +57,7 @@
 
 			$level--;
 
-			while (!$this->levelNodes[$level]) {
+			while (!isset($this->levelNodes[$level])) {
 				if ($level==0)
 					return $this->rootNode;
 
@@ -67,13 +71,18 @@
 		 * Create a document node from an odt.
 		 */
 		public function parseOdt($odt) {
+			return $this->parseNodes($odt->getNodes());
+		}
+
+		/**
+		 * Parse array of nodes.
+		 */
+		public function parseNodes($nodes) {
 			$this->rootNode=new DocumentNode();
 			$this->levelNodes=array();
 			$currentNode=$this->rootNode;
 
-			foreach ($odt->getNodes() as $odtNode) {
-				//echo "parding node..\n";
-
+			foreach ($nodes as $odtNode) {
 				if ($this->isBodyNode($odtNode)) {
 					switch ($odtNode->getType()) {
 						case OdtNode::IMAGE:
@@ -83,7 +92,12 @@
 						case OdtNode::TEXT:
 							if ($odtNode->getColor()!="#ff0000")
 								$currentNode->appendBody($odtNode->getText());
+							break;
 
+						case OdtNode::TABLE;
+							$table=new DocumentTable();
+							$table->parseTableNode($odtNode);
+							$currentNode->addTable($table);
 							break;
 					}
 				}

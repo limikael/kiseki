@@ -8,6 +8,7 @@
 		private $title;
 		private $body;
 		private $images;
+		private $tables;
 		private $attributes;
 		private $children;
 		private $imageTargetDir;
@@ -22,6 +23,7 @@
 			$this->images=array();
 			$this->imageTargetDir=".";
 			$this->usedImages=array();
+			$this->tables=array();
 		}
 
 		/**
@@ -53,6 +55,37 @@
 		 */
 		public function addImage($imageOdtNode) {
 			$this->images[]=$imageOdtNode;
+		}
+
+		/**
+		 * Add table.
+		 */
+		public function addTable($documentTable) {
+			$this->tables[]=$documentTable;
+		}
+
+		/**
+		 * Tables?
+		 */
+		public function hasTables() {
+			return sizeof($this->tables)!=0;
+		}
+
+		/**
+		 * Get first table.
+		 */
+		public function getFirstTable() {
+			if (!$this->hasTables())
+				throw new Exception("Node doesn't have any tables.");
+
+			return $this->tables[0];
+		}
+
+		/**
+		 * Get tables.
+		 */
+		public function getTables() {
+			return $this->tables;
 		}
 
 		/**
@@ -267,5 +300,14 @@
 				$res=array_merge($res,$child->getUsedImages());
 
 			return $res;
+		}
+
+		/**
+		 * Load.
+		 */
+		public static function load($fn) {
+			$odt=new OdtFile($fn);
+			$parser=new DocumentNodeParser();
+			return $parser->parseOdt($odt);
 		}
 	}

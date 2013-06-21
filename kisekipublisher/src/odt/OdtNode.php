@@ -7,6 +7,7 @@
 
 		const TEXT="text";
 		const IMAGE="image";
+		const TABLE="table";
 
 		/**
 		 * Get node type.
