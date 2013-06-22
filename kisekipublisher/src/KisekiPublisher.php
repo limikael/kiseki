@@ -207,6 +207,8 @@
 		 * Dispatch call.
 		 */
 		public function dispatch() {
+			ini_set('display_errors',TRUE);
+
 			if (array_key_exists("file",$_REQUEST)) {
 				$file=str_replace("/","",$_REQUEST["file"]);
 				readfile(__DIR__."/files/".$file);
