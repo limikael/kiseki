@@ -37,7 +37,7 @@ class SvgClipLibrary {
 	public static function parseAsset(assetName:String):SvgClipLibrary {
 		var s:String=Assets.getText(assetName);
 
-		//trace(s);
+		trace("Will parse SVG asset, bytes="+s.length);
 
 		if (s==null)
 			throw "Unable to get asset";
