@@ -14,7 +14,7 @@ class Show implements IAction {
 	private var _course:Course;
 	public var ref:String;
 
-	public var _displayObjects:Array<DisplayObject>;
+//	public var _displayObjects:Array<DisplayObject>;
 
 	/**
 	 * Construct.
@@ -28,19 +28,26 @@ class Show implements IAction {
 	public function initializeCourse(c:Course) {
 		_course=c;
 
-		_displayObjects=new Array<DisplayObject>();
+/*		_displayObjects=new Array<DisplayObject>();
 
 		var g:Glob=new Glob(ref);
 		for (s in _course.variables.getNames())
 			if (g.match(s))
-				_displayObjects.push(_course.variables.getVariable(s));
+				_displayObjects.push(_course.variables.getVariable(s));*/
 	}
 
 	/**
 	 * Execute the action.
 	 */
 	public function execute():Void {
-		for (d in _displayObjects) {
+		var objs:Array<DisplayObject>=new Array<DisplayObject>();
+
+		var g:Glob=new Glob(ref);
+		for (s in _course.variables.getNames())
+			if (g.match(s))
+				objs.push(_course.variables.getVariable(s));
+
+		for (d in objs) {
 			if (!d.visible) {
 				d.visible=true;
 

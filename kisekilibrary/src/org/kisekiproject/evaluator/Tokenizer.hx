@@ -92,6 +92,9 @@ class Tokenizer {
 		var p:Int=_pos;
 		var s:String=extractRegExp(~/[A-Za-z_$]?[A-Za-z0-9_$]*/);
 
+		if (s=="null")
+			return new Token(Token.STRING,null,p);
+
 		if (s=="if" || s=="else")
 			return new Token(Token.FLOW,s,p);
 

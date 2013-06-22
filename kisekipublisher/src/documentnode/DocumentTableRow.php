@@ -34,4 +34,11 @@
 		public function getCellNode($index) {
 			return $this->cellNodes[$index];
 		}
+
+		/**
+		 * Get cell node.
+		 */
+		public function getCellNodes() {
+			return $this->cellNodes;
+		}
 	}

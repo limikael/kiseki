@@ -82,8 +82,11 @@ class BinaryOperatorNode implements ISyntaxNode {
 	 * Perform calculation.
 	 */
 	private function calculate():Void {
-		var leftVal:Float=dynamicToFloat(_left.value);
-		var rightVal:Float=dynamicToFloat(_right.value);
+/*		var leftVal:Float=dynamicToFloat(_left.value);
+		var rightVal:Float=dynamicToFloat(_right.value);*/
+
+		var leftVal:Dynamic=_left.value;
+		var rightVal:Dynamic=_right.value;
 
 		switch (_operator) {
 			case "+":
@@ -111,6 +114,7 @@ class BinaryOperatorNode implements ISyntaxNode {
 				_value=(leftVal>=rightVal)?1:0;
 
 			case "==", "=":
+				//trace("cmp: "+leftVal+" == "+rightVal);
 				_value=(leftVal==rightVal)?1:0;
 
 			case "&&":

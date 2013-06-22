@@ -13,9 +13,11 @@ import nme.text.TextFormat;
 import nme.geom.Matrix;
 import nme.geom.Rectangle;
 import nme.text.TextFormatAlign;
+import nme.text.Font;
 
 import format.svg.Text;
 import format.svg.Group;
+import format.gfx.LineStyle;
 
 /**
  * Overridden version of GfxGraphics.
@@ -38,6 +40,13 @@ class ClipGfxGraphics extends GfxGraphics {
 	 */
 	override public function renderText(text:Text) {
 		texts.push(text);
+	}
+
+	/**
+	 * Line style.
+	 */
+	override public function lineStyle(style:LineStyle) {
+		graphics.lineStyle(style.thickness,style.color,style.alpha,true,style.scaleMode,style.capsStyle,style.jointStyle,style.miterLimit);
 	}
 }
 
@@ -144,6 +153,18 @@ class SvgClip extends Sprite {
 	}
 
 	/**
+	 * Remap a font name.
+	 */
+	private static function findEmbeddedFont(fn:String):String {
+		for (f in Font.enumerateFonts())
+			if (f.fontName.toLowerCase().indexOf(fn.toLowerCase())>=0)
+				return f.fontName;
+
+		return null;
+	}
+
+
+	/**
 	 * Render.
 	 */
 	private function render():Void {
@@ -158,7 +179,18 @@ class SvgClip extends Sprite {
 			//trace("n: "+text.name);
 			var tf:TextFormat=new TextFormat();
 			tf.size=text.font_size;
-			tf.font=text.font_family;
+
+			var embeddedFont:String=findEmbeddedFont(text.font_family);
+
+			if (embeddedFont!=null) {
+				trace("Specified font: "+text.font_family+", using: "+embeddedFont);
+				tf.font=embeddedFont;
+			}
+
+			else {
+				trace("**** Warning, font not embedded: "+text.font_family);
+				tf.font=text.font_family;
+			}
 
 			switch (text.fill) {
 				case FillSolid(color):
@@ -178,9 +210,13 @@ class SvgClip extends Sprite {
 				default:
 			}
 
-			trace("align: "+text.text_align);
+			//trace("align: "+text.text_align);
 
 			var t:TextField=new TextField();
+
+			if (embeddedFont!=null)
+				t.embedFonts=true;
+
 			t.name=text.name;
 			t.selectable=false;
 			t.defaultTextFormat=tf;

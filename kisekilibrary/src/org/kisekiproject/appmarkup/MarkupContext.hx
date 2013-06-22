@@ -181,10 +181,14 @@ class MarkupContext {
 				}
 
 				else {
-					if (childNodes.length!=1)
+					if (childNodes.length>1)
 						throw "Not an array property";
 
-					Reflect.setProperty(object,name,parseNode(childNodes[0]));
+					if (childNodes.length==0)
+						Reflect.setProperty(object,name,null);
+
+					else
+						Reflect.setProperty(object,name,parseNode(childNodes[0]));
 				}
 			}
 		}

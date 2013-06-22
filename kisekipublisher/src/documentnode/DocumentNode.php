@@ -34,6 +34,9 @@
 
 			foreach ($this->children as $child)
 				$child->setImageTargetDir($dir);
+
+			foreach ($this->tables as $table)
+				$table->setImageTargetDir($dir);
 		}
 
 		/**
@@ -298,6 +301,9 @@
 
 			foreach ($this->children as $child)
 				$res=array_merge($res,$child->getUsedImages());
+
+			foreach ($this->tables as $table)
+				$res=array_merge($res,$table->getUsedImages());
 
 			return $res;
 		}

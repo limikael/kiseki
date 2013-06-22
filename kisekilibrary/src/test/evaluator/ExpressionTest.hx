@@ -16,8 +16,10 @@ class ExpressionTest {
 		var v:VariableStore=new VariableStore();
 
 		v.setVariable("hello",function(x){return x+1;});
+		v.setVariable("str",{x: null});
 
-		x=new Expression("hello(1)",v);
+//		x=new Expression("hello(1)",v);
+		x=new Expression('str.x==null',v);
 
 		trace("result: "+x.value);
 	}

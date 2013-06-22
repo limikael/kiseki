@@ -101,7 +101,7 @@ class ResourceItem {
 		_loaded=true;
 
 		if (_loader!=null) {
-			_bitmapData=new BitmapData(Math.ceil(_loader.width),Math.ceil(_loader.height),true);
+			_bitmapData=new BitmapData(Math.ceil(_loader.width),Math.ceil(_loader.height),true,0x00ffffff);
 			_bitmapData.draw(_loader);
 		}
 

@@ -34,6 +34,15 @@
 		}
 
 		/**
+		 * Set image target dir.
+		 */
+		public function setImageTargetDir($dir) {
+			foreach ($this->rows as $row)
+				foreach ($row->getCellNodes() as $cellNode)
+					$cellNode->setImageTargetDir($dir);
+		}
+
+		/**
 		 * Get cell.
 		 */
 		public function getRow($index) {
@@ -52,5 +61,18 @@
 		 */
 		public function getCell($row, $col) {
 			return $this->rows[$row]->getCell($col);
+		}
+
+		/**
+		 * Get used images.
+		 */
+		public function getUsedImages() {
+			$res=array();
+
+			foreach ($this->rows as $row)
+				foreach ($row->getCellNodes() as $cellNode)
+					$res=array_merge($res,$cellNode->getUsedImages());
+
+			return $res;
 		}
 	}
