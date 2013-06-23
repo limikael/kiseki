@@ -4,8 +4,10 @@
 		<title>Kiseki Publisher: <?php echo $page["title"]; ?></title>
 		<link rel="stylesheet" type="text/css" href="?file=publisher.css" />
 		<meta charset="utf-8" />
+		<script type="text/javascript" src="?file=swfobject.js"></script>
 	</head>
 	<body>
+		<div id="preview-holder"><div id="preview-content"></div></div>
 		<div id="canvas-wrapper">
 			<div id="canvas">
 				<h1><?php echo $page["title"]; ?></h1>

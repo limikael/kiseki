@@ -202,7 +202,23 @@
 			catch (Exception $e) {
 				$this->message($e->getMessage());
 				$this->message($e->getTraceAsString());
+				exit();
 			}
+		}
+
+		/**
+		 * Build and preview.
+		 */
+		private function buildAndPreview() {
+			$this->build();
+
+			echo '<script type="text/javascript">';
+			echo 'document.getElementById("preview-holder").style.display="block";';
+			echo 'var flashvars = {};';
+			echo 'var params = {"base": "build"};';
+			echo 'var attributes = {id: "Main", name: "Main"};';
+			echo 'swfobject.embedSWF("build/main.swf?t='.rand(0,100000).'", "preview-content", "100%", "100%", "11.0.0", "expressInstall.swf", flashvars, params, attributes);';
+			echo '</script>'."\n";
 		}
 
 		/**
@@ -219,6 +235,10 @@
 
 				case "png":
 					header("Content-type: image/png");
+					break;
+
+				case "js":
+					header("Content-type: text/javascript");
 					break;
 			}
 
@@ -239,12 +259,22 @@
 			if (array_key_exists("action",$_REQUEST))
 				$action=$_REQUEST["action"];
 
+			else if (array_key_exists("buildpreview",$_REQUEST))
+				$action="buildpreview";
+
+			else if (array_key_exists("build",$_REQUEST))
+				$action="build";
+
 			else
 				$action="main";
 
 			switch($action) {
 				case "build":
 					$this->build();
+					break;
+
+				case "buildpreview":
+					$this->buildAndPreview();
 					break;
 
 				case "main":
