@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Kiseki Publisher: <?php echo $page["title"]; ?></title>
 		<link rel="stylesheet" type="text/css" href="?file=publisher.css" />
+		<meta charset="utf-8" />
 	</head>
 	<body>
 		<div id="canvas-wrapper">

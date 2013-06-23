@@ -9,8 +9,8 @@
 	 */
 	class GoogleDriveLoader {
 
-		private $clientId;
-		private $clientSecret;
+		private $clientJsonFile;
+		private $privateKeyFile;
 
 		private $client;
 		private $service;
@@ -21,49 +21,40 @@
 		/**
 		 * Constructor.
 		 */
-		public function GoogleDriveLoader($clientId, $clientSecret) {
-			$this->clientId=$clientId;
-			$this->clientSecret=$clientSecret;
-			$this->initialized=FALSE;
-		}
+		public function GoogleDriveLoader($clientJsonFile=NULL, $privateKeyFile=NULL) {
+			if (!$clientJsonFile)
+				$clientJsonFile=__DIR__."/client.json";
 
-		/**
-		 * Query to be sent along the redirect url.
-		 */
-		public function setRedirectQuery($q) {
-			$this->redirectQuery=$q;
+			if (!$privateKeyFile)
+				$privateKeyFile=__DIR__."/privatekey.p12";
+
+			$this->clientJsonFile=$clientJsonFile;
+			$this->privateKeyFile=$privateKeyFile;
+			$this->initialized=FALSE;
 		}
 
 		/**
 		 * Initialize
 		 */
 		public function initialize() {
-			if (!session_id())
-				session_start();
+//			echo "about to initialize..".$this->clientJsonFile."<br/>";
+			$clientJson=json_decode(file_get_contents($this->clientJsonFile),TRUE);
+
+/*			print_r($clientJson);
+
+			exit();*/
 
 			$this->client=new Google_Client();
-			$this->client->setClientId($this->clientId);
-			$this->client->setClientSecret($this->clientSecret);
+			$this->client->setClientId($clientJson["web"]["client_id"]);
 
-			$url=ScriptUtil::getScriptUrl();
-			if ($this->redirectQuery)
-				$url.="?".$this->redirectQuery;
-
-			$this->client->setRedirectUri($url);
-			$this->client->setScopes(array('https://www.googleapis.com/auth/drive'));
+			$key=file_get_contents($this->privateKeyFile);
+			$this->client->setAssertionCredentials(new Google_AssertionCredentials(
+				$clientJson["web"]["client_email"],
+				array('https://www.googleapis.com/auth/drive'),
+				$key)
+			);
 
 			$this->service=new Google_DriveService($this->client);
-
-			if (array_key_exists("googleAccessToken",$_SESSION) && substr($_SESSION["googleAccessToken"],0,1)=="{") {
-				$this->client->setAccessToken($_SESSION["googleAccessToken"]);
-			}
-
-			else {
-				$googleAccessToken=$this->client->authenticate();
-				//echo "setting access token: ".$googleAccessToken;
-				$_SESSION["googleAccessToken"]=$googleAccessToken;
-				$this->client->setAccessToken($googleAccessToken);
-			}
 
 			$this->initialized=TRUE;
 		}

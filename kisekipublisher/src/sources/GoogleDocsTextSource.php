@@ -59,8 +59,6 @@
 		 * Process the document.
 		 */
 		public function process() {
-			$this->googleDriveLoader->setRedirectQuery("action=build");
-
 			$contents=$this->googleDriveLoader->loadTextDocument($this->id);
 
 			$this->publisher->message("Processing: ".$this->label." -> ".$this->target);

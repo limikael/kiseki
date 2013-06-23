@@ -183,6 +183,8 @@
 
 			$files=scandir($this->getOutputDir());
 
+			$this->message("Building '".$this->title."' ...");
+
 			try {
 				foreach ($files as $f)
 					if ($f[0]!=".")
@@ -204,14 +206,33 @@
 		}
 
 		/**
+		 * Serve file.
+		 */
+		private function serveFile($fn) {
+			$fn=str_replace("/","",$fn);
+			$ext=pathinfo($fn,PATHINFO_EXTENSION);
+
+			switch ($ext) {
+				case "css":
+					header("Content-type: text/css");
+					break;
+
+				case "png":
+					header("Content-type: image/png");
+					break;
+			}
+
+			readfile(__DIR__."/files/".$fn);
+		}
+
+		/**
 		 * Dispatch call.
 		 */
 		public function dispatch() {
 			ini_set('display_errors',TRUE);
 
 			if (array_key_exists("file",$_REQUEST)) {
-				$file=str_replace("/","",$_REQUEST["file"]);
-				readfile(__DIR__."/files/".$file);
+				$this->serveFile($_REQUEST["file"]);
 				return;
 			}
 
