@@ -15,6 +15,7 @@
 	require_once "targets/ITarget.php";
 	require_once "targets/BrowserPreviewTarget.php";
 	require_once "targets/ScormTarget.php";
+	require_once "targets/FtpTarget.php";
 
 	/**
 	 * Kiseki publisher.
@@ -190,8 +191,14 @@
 					if ($f[0]!=".")
 						@unlink($this->getOutputDir()."/".$f);
 
-				foreach ($this->sources as $source)
+				$this->message("processing");
+
+				foreach ($this->sources as $source) {
+					$this->message("processing source");
 					$source->process();
+				}
+
+				$this->message("sources done, processing targets");
 
 				foreach ($this->targets as $target)
 					$target->process();

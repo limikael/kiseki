@@ -37,12 +37,11 @@
 		 * Initialize
 		 */
 		public function initialize() {
-//			echo "about to initialize..".$this->clientJsonFile."<br/>";
+			/*echo "about to initialize..".$this->clientJsonFile."<br/>";
+			exit();*/
 			$clientJson=json_decode(file_get_contents($this->clientJsonFile),TRUE);
 
-/*			print_r($clientJson);
-
-			exit();*/
+			//print_r($clientJson);
 
 			$this->client=new Google_Client();
 			$this->client->setClientId($clientJson["web"]["client_id"]);
@@ -63,10 +62,27 @@
 		 * Load text document.
 		 */
 		public function loadTextDocument($id) {
+/*			echo "will initialize";
+			exit();*/
+
 			if (!$this->initialized)
 				$this->initialize();
 
+/*			echo "getting file ".($this->service->files);
+			echo "init done..";
+			exit();*/
+
 			$file=$this->service->files->get($id);
+
+/*			echo "got file: ";
+			print_r($file);
+			exit();*/
+
+/*			if (!$file) {
+				echo "unable";
+				exit();
+			}*/
+
 			$downloadUrl=$file["exportLinks"]["application/vnd.oasis.opendocument.text"];
 
 			$request=new Google_HttpRequest($downloadUrl);

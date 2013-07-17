@@ -9,6 +9,9 @@
 	 */
 	class GoogleDocsTextSource implements ISource {
 
+		private static $lastId;
+		private static $lastContents;
+
 		private $template;
 		private $id;
 		private $target;
@@ -59,14 +62,24 @@
 		 * Process the document.
 		 */
 		public function process() {
-			$contents=$this->googleDriveLoader->loadTextDocument($this->id);
+			if ($this->id==GoogleDocsTextSource::$lastId) {
+				$contents=GoogleDocsTextSource::$lastContents;
+			}
+
+			else {
+				$this->publisher->message("Loading ".$this->id);
+				$contents=$this->googleDriveLoader->loadTextDocument($this->id);
+			}
+
+			GoogleDocsTextSource::$lastId=$this->id;
+			GoogleDocsTextSource::$lastContents=$contents;
 
 			$this->publisher->message("Processing: ".$this->label." -> ".$this->target);
 
 			$filename=sys_get_temp_dir()."/odt".rand();
 			file_put_contents($filename,$contents);
 			$odt=new OdtFile($filename);
-			@unlink($filename);
+			//@unlink($filename);
 
 			$parser=new DocumentNodeParser();
 			$this->documentNode=$parser->parseOdt($odt);
