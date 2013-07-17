@@ -52,6 +52,8 @@
 			if (!$res)
 				throw new Exception("Unable to login to ftp server.");
 
+			ftp_pasv($conn,TRUE);
+
 			$files=scandir($this->publisher->getOutputDir());
 
 			foreach ($files as $file) {
