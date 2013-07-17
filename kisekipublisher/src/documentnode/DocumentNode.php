@@ -7,6 +7,7 @@
 
 		private $title;
 		private $body;
+		private $htmlBody;
 		private $images;
 		private $tables;
 		private $attributes;
@@ -24,6 +25,8 @@
 			$this->imageTargetDir=".";
 			$this->usedImages=array();
 			$this->tables=array();
+			$this->body="";
+			$this->htmlBody="";
 		}
 
 		/**
@@ -50,7 +53,14 @@
 		 * Get body of the node.
 		 */
 		public function getBody() {
-			return str_replace('"',"",$this->body);
+			return trim(str_replace('"',"",$this->body));
+		}
+
+		/**
+		 * Get body of the node.
+		 */
+		public function getHtmlBody() {
+			return nl2br(trim(str_replace('"',"",$this->htmlBody)));
 		}
 
 		/**
@@ -242,29 +252,32 @@
 		/**
 		 * Append to body.
 		 */
-		public function appendBody($value) {
-			$lines=explode("\n",$value);
+		public function appendBody($value, $bold) {
+			$found=TRUE;
 
-			foreach ($lines as $line) {
-				if (substr(trim($line),0,1)=="@") {
-					preg_match('/\@([A-Za-z]+):(.*)/',trim($line),$matches);
-					$this->attributes[$matches[1]]=trim($matches[2]);
+			while ($found) {
+				$found=preg_match("/(\n|^)\\@([A-Za-z]+):([^\n]*)(\n|$$)/",$value,$matches);
+
+				if ($found) {
+					$attrs[trim($matches[2])]=trim($matches[3]);
+
+					if ($matches[0][0]=="\n" && $matches[0][strlen($matches[0])-1]=="\n")
+						$replace="\n";
+
+					else
+						$replace="";
+
+					$value=preg_replace("/(\n|^)\\@([A-Za-z]+):([^\n]*)(\n|$$)/",$replace,$value,1);
 				}
-
-				else
-					$this->appendBodyLine($line);
 			}
-		}
 
-		/**
-		 * Append body.
-		 */
-		public function appendBodyLine($value) {
-			if ($this->body)
-				$this->body.="\n";
+			if ($bold)
+				$this->htmlBody.="<b>";
 
-			else
-				$this->body="";
+			$this->htmlBody.=$value;
+
+			if ($bold)
+				$this->htmlBody.="</b>";
 
 			$this->body.=$value;
 		}

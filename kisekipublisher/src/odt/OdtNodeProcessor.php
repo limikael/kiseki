@@ -95,10 +95,12 @@
 		private function appendText($s, $styleChain) {
 			$styleName=$this->getStyleNameFromChain($styleChain);
 			$color=$this->getColorFromChain($styleChain);
+			$bold=$this->getBoldFromChain($styleChain);
 
 			if (!$this->currentNode || 
 					$styleName!=$this->currentNode->getStyle() ||
-					$color!=$this->currentNode->getColor()) {
+					$color!=$this->currentNode->getColor() ||
+					$bold!=$this->currentNode->getBold()) {
 
 				if ($this->currentNode && $this->currentNode->getText())
 					$this->nodes[]=$this->currentNode;
@@ -106,6 +108,7 @@
 				$this->currentNode=new OdtTextNode();
 				$this->currentNode->setStyle($styleName);
 				$this->currentNode->setColor($color);
+				$this->currentNode->setBold($bold);
 			}
 
 			//echo "style: $styleName text: $s\n";
@@ -137,5 +140,16 @@
 					$color=$style->getColor();
 
 			return $color;
+		}
+
+		/**
+		 * Get bold from chain.
+		 */
+		private function getBoldFromChain($styleChain) {
+			foreach ($styleChain as $style)
+				if ($style->getBold())
+					return true;
+
+			return false;
 		}
 	}

@@ -90,8 +90,9 @@
 							break;
 
 						case OdtNode::TEXT:
+							//echo "appending node...".$odtNode->toString()."<br/>";
 							if ($odtNode->getColor()!="#ff0000")
-								$currentNode->appendBody($odtNode->getText());
+								$currentNode->appendBody($odtNode->getRawText(),$odtNode->getBold());
 							break;
 
 						case OdtNode::TABLE;
@@ -104,7 +105,7 @@
 
 				else {
 					$currentNode=new DocumentNode();
-					$currentNode->setTitle($odtNode->getText());
+					$currentNode->setTitle(trim($odtNode->getText()));
 					$level=$this->getLevelByStyleName($odtNode->getStyle());
 					$this->findCurrentParent($level)->addChild($currentNode);
 					$this->levelNodes[$level]=$currentNode;

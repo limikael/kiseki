@@ -11,12 +11,14 @@
 		private $odt;
 		private $isDefined;
 		private $color;
+		private $bold;
 
 		/**
 		 * Constructor.
 		 */
 		public function OdtStyle($odt) {
 			$this->odt=$odt;
+			$this->bold=false;
 		}
 
 		/**
@@ -44,6 +46,9 @@
 			foreach ($node->getElementsByTagName("text-properties") as $textProperties) {
 				//echo "parsing style prop..\n";
 				$this->color=$textProperties->getAttribute("fo:color");
+
+				if ($textProperties->getAttribute("fo:font-weight")=="bold")
+					$this->bold=true;
 			}
 
 			$this->displayName=$node->getAttribute("style:display-name");
@@ -84,5 +89,12 @@
 				return $this->parent->getColor();
 
 			return "#000000";
+		}
+
+		/**
+		 * Get bold.
+		 */
+		public function getBold() {
+			return $this->bold;
 		}
 	}

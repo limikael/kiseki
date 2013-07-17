@@ -6,7 +6,8 @@
 
 	$loader=new GoogleDriveLoader();
 
-	$doc=$loader->loadTextDocument("1QgGAv-pGZvODABiG1pcimTodn0OFpsEID0IIDWscAqs");
+	$doc=$loader->loadTextDocument("1M8eaq2vFTrIMjT1W14zJvTz-kxz1PO2l1i3lQtrDO8g");
 
 	echo "got doc ".strlen($doc);
 
+	file_put_contents("doc.zip",$doc);
