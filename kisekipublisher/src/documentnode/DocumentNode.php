@@ -252,7 +252,7 @@
 		/**
 		 * Append to body.
 		 */
-		public function appendBody($value, $bold) {
+		public function appendBody($value, $bold, $anchorTarget) {
 			$found=TRUE;
 
 			while ($found) {
@@ -271,6 +271,9 @@
 				}
 			}
 
+			if ($anchorTarget)
+				$this->htmlBody.='<a href="'.$anchorTarget.'">';
+
 			if ($bold)
 				$this->htmlBody.="<b>";
 
@@ -278,6 +281,9 @@
 
 			if ($bold)
 				$this->htmlBody.="</b>";
+
+			if ($anchorTarget)
+				$this->htmlBody.='</a>';
 
 			$this->body.=$value;
 		}

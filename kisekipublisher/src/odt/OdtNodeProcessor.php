@@ -54,6 +54,12 @@
 			if ($node->nodeName=="text:p" || $node->nodeName=="text:h" || $node->nodeName=="text:span")
 				$styleChain[]=$this->odt->getStyleByName($node->getAttribute("text:style-name"));
 
+			if ($node->nodeName=="text:a") {
+				$st=new OdtStyle($this->odt);
+				$st->setTarget($node->getAttribute("xlink:href"));
+				$styleChain[]=$st;
+			}
+
 			if ($node->nodeType==XML_TEXT_NODE)
 				$this->appendText($node->nodeValue, $styleChain);
 
@@ -96,11 +102,13 @@
 			$styleName=$this->getStyleNameFromChain($styleChain);
 			$color=$this->getColorFromChain($styleChain);
 			$bold=$this->getBoldFromChain($styleChain);
+			$target=$this->getTargetFromChain($styleChain);
 
 			if (!$this->currentNode || 
 					$styleName!=$this->currentNode->getStyle() ||
 					$color!=$this->currentNode->getColor() ||
-					$bold!=$this->currentNode->getBold()) {
+					$bold!=$this->currentNode->getBold() ||
+					$target!=$this->currentNode->getTarget()) {
 
 				if ($this->currentNode && $this->currentNode->getText())
 					$this->nodes[]=$this->currentNode;
@@ -109,6 +117,7 @@
 				$this->currentNode->setStyle($styleName);
 				$this->currentNode->setColor($color);
 				$this->currentNode->setBold($bold);
+				$this->currentNode->setTarget($target);
 			}
 
 			//echo "style: $styleName text: $s\n";
@@ -151,5 +160,16 @@
 					return true;
 
 			return false;
+		}
+
+		/**
+		 * Get target from chain.
+		 */
+		private function getTargetFromChain($styleChain) {
+			foreach ($styleChain as $style)
+				if ($style->getTarget())
+					return $style->getTarget();
+
+			return null;
 		}
 	}

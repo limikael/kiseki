@@ -11,6 +11,7 @@
 		private $style;
 		private $color;
 		private $bold;
+		private $target;
 
 		/**
 		 * Constructor.
@@ -93,11 +94,25 @@
 		}
 
 		/**
+		 * Get target.
+		 */
+		public function getTarget() {
+			return $this->target;
+		}
+
+		/**
+		 * Set target.
+		 */
+		public function setTarget($a) {
+			$this->target=$a;
+		}
+
+		/**
 		 * String rep.
 		 */
 		public function toString() {
 			//$t=str_replace("\n", "", substr($this->text, 0,80));
 			$t=str_replace("\n", "#", $this->text);
-			return '[TextNode style="'.$this->style.'" color="'.$this->color.'" bold="'.$this->bold.'" text="'.$t.'"]';
+			return '[TextNode style="'.$this->style.'" color="'.$this->color.'" bold="'.$this->bold.'" text="'.$t.'" '.$this->target.']';
 		}
 	}

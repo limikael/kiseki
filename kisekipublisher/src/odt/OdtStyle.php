@@ -12,6 +12,7 @@
 		private $isDefined;
 		private $color;
 		private $bold;
+		private $target;
 
 		/**
 		 * Constructor.
@@ -96,5 +97,19 @@
 		 */
 		public function getBold() {
 			return $this->bold;
+		}
+
+		/**
+		 * Get target.
+		 */
+		public function getTarget() {
+			return $this->target;
+		}
+
+		/**
+		 * Set target.
+		 */
+		public function setTarget($v) {
+			$this->target=$v;
 		}
 	}

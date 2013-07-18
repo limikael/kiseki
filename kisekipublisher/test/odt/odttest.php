@@ -3,7 +3,7 @@
 	require_once "../../src/KisekiPublisher.php";
 	require_once "odt/OdtFile.php";
 
-	$odt=new OdtFile("Coachspelet.odt");
+	$odt=new OdtFile("Lifewellness.zip");
 
 	$nodes=$odt->getNodes();
 

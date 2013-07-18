@@ -92,7 +92,7 @@
 						case OdtNode::TEXT:
 							//echo "appending node...".$odtNode->toString()."<br/>";
 							if ($odtNode->getColor()!="#ff0000")
-								$currentNode->appendBody($odtNode->getRawText(),$odtNode->getBold());
+								$currentNode->appendBody($odtNode->getRawText(),$odtNode->getBold(),$odtNode->getTarget());
 							break;
 
 						case OdtNode::TABLE;
