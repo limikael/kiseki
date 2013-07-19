@@ -41,4 +41,16 @@
 		public function getCellNodes() {
 			return $this->cellNodes;
 		}
+
+		/**
+		 * Get cell bodies.
+		 */
+		public function getCells() {
+			$a=array();
+
+			foreach ($this->cellNodes as $node)
+				$a[]=$node->getBody();
+
+			return $a;
+		}
 	}

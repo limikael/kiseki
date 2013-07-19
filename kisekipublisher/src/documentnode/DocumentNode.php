@@ -187,10 +187,10 @@
 		 * Internal.
 		 */
 		private function findChildByTitleInternal($name) {
-			if ($this->getTitle()==$name)
-				return $this;
-
 			foreach ($this->children as $child) {
+				if ($child->getTitle()==$name)
+					return $child;
+
 				$cand=$child->findChildByTitleInternal($name);
 
 				if ($cand)
@@ -259,7 +259,7 @@
 				$found=preg_match("/(\n|^)\\@([A-Za-z]+):([^\n]*)(\n|$$)/",$value,$matches);
 
 				if ($found) {
-					$attrs[trim($matches[2])]=trim($matches[3]);
+					$this->attributes[trim($matches[2])]=trim($matches[3]);
 
 					if ($matches[0][0]=="\n" && $matches[0][strlen($matches[0])-1]=="\n")
 						$replace="\n";
